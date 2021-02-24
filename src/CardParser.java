@@ -51,12 +51,19 @@ public class CardParser
 	
 	public void sortLowestCostToHighestCost()
 	{
-		//this methods job is to take our ArrayList of minions and re-arrange it so that
-		//it is in the order of cards with the lowest cost first, and cards with the highest
-		//cost last.
-		//Note: this.theMinions.get(3).getCost() will give you the cost of card #3
-		//Note: this.theMinions.remove(3) will remove the card that used to be at bucket 3
-		//you will need to cobble together your own algorithm for getting this arraylist sorted
-		
+		temp = new ArrayList<HearthstoneCard>();
+		for (int i = 0; i < theMinions.size(); i++);
+		{
+			for (int j = i+1; j < theMinions.size(j++));
+			{
+				if (this.theMinions.get(i).getCost() > this.theMinions.get(j).getCost())
+				{
+					temp.add(this.theMinions.get(j));
+					this.theMinions.remove(i);
+					theMinions = temp;					
+					this.theMinions.get(j).display();
+				}
+			}
+		}
 	}
 }
