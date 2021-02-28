@@ -66,4 +66,22 @@ public class CardParser
 			}
 		}
 	}
+	
+	public static void SelectionSort(int[] theMinions)
+	{
+		for (int i=0; i < theMinions.length; i++)
+		{
+			int theMinions = i;
+			for (int j = i + 1; j < theMinions.length; j++)
+			{
+				if (theMinions[j] < theMinions[min])
+				{
+					theMinions = j;
+				}
+			}
+		}
+			int swap = theMinions[i];
+			theMinions[i] = theMinions[min];
+			theMinions[min] = swap;
+	}
 }
