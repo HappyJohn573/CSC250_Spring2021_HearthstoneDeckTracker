@@ -49,39 +49,78 @@ public class CardParser
 		}
 	}
 	
-	public void sortLowestCostToHighestCost()
+	public void selectionSortHighestCostToLowestCost()
 	{
-		temp = new ArrayList<HearthstoneCard>();
-		for (int i = 0; i < theMinions.size(); i++);
+		for(int max = 0; max < this.theMinions.size(); max++)
 		{
-			for (int j = i+1; j < theMinions.size(j++));
-			{
-				if (this.theMinions.get(i).getCost() > this.theMinions.get(j).getCost())
-				{
-					temp.add(this.theMinions.get(j));
-					this.theMinions.remove(i);
-					theMinions = temp;					
-					this.theMinions.get(j).display();
-				}
-			}
+			int maxIndex = this.findIndexOfLargestCostFromPosition(max);
+			HearthstoneCard temp = this.theMinions.get(max);
+			this.theMinions.set(max, this.theMinions.get(maxIndex));
+			this.theMinions.set(maxIndex, temp);
 		}
 	}
 	
-	public static void SelectionSort(int[] theMinions)
+	public void insertionSortLowestCostToHighestCost()
 	{
-		for (int i=0; i < theMinions.length; i++)
+		for(int currStart = 1; currStart < this.theMinions.size(); currStart++)
 		{
-			int theMinions = i;
-			for (int j = i + 1; j < theMinions.length; j++)
+			int currIndex = currStart;
+			HearthstoneCard temp;
+			while(currIndex > 0 && this.theMinions.get(currIndex).getCost() < 
+					this.theMinions.get(currIndex-1).getCost())
 			{
-				if (theMinions[j] < theMinions[min])
-				{
-					theMinions = j;
-				}
+				temp = this.theMinions.get(currIndex);
+				this.theMinions.set(currIndex, this.theMinions.get(currIndex-1));
+				this.theMinions.set(currIndex-1, temp);
+				currIndex--;
+				
+			}	
+		}
+	}
+	
+	public void sortLowestCostToHighestCost()
+	{
+		ArrayList<HearthstoneCard> theSortedList = new ArrayList<HearthstoneCard>();
+		HearthstoneCard nextSmallest;
+		while(this.theMinions.size() > 0)
+		{
+			nextSmallest = this.findSmallest();
+			theSortedList.add(nextSmallest);
+		}
+		
+		this.theMinions = theSortedList;  
+
+	}
+	
+	private int findIndexOfLargestCostFromPosition(int pos)
+	{
+		HearthstoneCard currWinner = this.theMinions.get(pos);
+		int indexOfWinner = pos;
+		for(int i = pos+1; i < this.theMinions.size(); i++)
+		{
+			if(this.theMinions.get(i).getCost() > currWinner.getCost())
+			{
+				currWinner = this.theMinions.get(i);
+				indexOfWinner = i;
 			}
 		}
-			int swap = theMinions[i];
-			theMinions[i] = theMinions[min];
-			theMinions[min] = swap;
+		return indexOfWinner;
+	}
+	
+	private HearthstoneCard findSmallest()
+	{
+		HearthstoneCard currWinner = this.theMinions.get(0);
+		int indexOfWinner = 0;
+		
+		for(int i = 1; i < this.theMinions.size(); i++)
+		{
+			if(this.theMinions.get(i).getCost() < currWinner.getCost())
+			{
+				currWinner = this.theMinions.get(i);
+				indexOfWinner = i;
+			}
+		}
+		this.theMinions.remove(indexOfWinner);
+		return currWinner;
 	}
 }
