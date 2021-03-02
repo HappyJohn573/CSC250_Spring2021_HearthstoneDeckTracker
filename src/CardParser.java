@@ -123,4 +123,6 @@ public class CardParser
 		this.theMinions.remove(indexOfWinner);
 		return currWinner;
 	}
+	
+	int attack = Arrays.binarySearch(HearthstoneCard findSmallest, key);
 }
